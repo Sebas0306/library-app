@@ -1,0 +1,63 @@
+type User{
+  id: ID
+  userName: String
+  email: String
+  role: String
+  password: String
+  books: [Book] @hasMany
+}
+
+type Book{
+  id: ID
+  title: String
+  image: String
+  description: String
+  copies: Int
+  autor: String
+  year: String
+  user: User @belongsTo(relation: "user")
+}
+
+type Query{
+  getUserById(id: ID! @eq):  User @find
+  getUsersList:[User!]! @all
+  getUsersListPage: [User!]! @paginate
+  getBookById(id: ID! @eq): Book @find
+  getBooksListPage: [Book!]! @paginate
+  getBooksList:[Book!]! @all
+  }
+
+  type Mutation{
+  createUser(
+    userName: String!
+    email: String! @rules(apply: ["email", "unique:users"])
+    password: String! @hash @rules(apply:["min:8"])
+  ): User @create
+
+  deleteUser(id: ID! @whereKey): User @delete
+
+  updateUser(id: ID!, userName: String, password: String @rules(apply:["min:8"])): User @update
+
+    createBook(
+    title: String!
+    image: String!
+    description: String!
+    autor: String!
+    copies: Int
+    year: String!
+  ): Book @create
+
+  updateBook(
+    id: ID!,
+    title: String, 
+    image: String,
+    description: String,
+    copies: Int,
+    autor: String,
+    year: String,
+  ): Book @update
+
+  deleteBook(id: ID! @whereKey): Book @delete
+
+  addBooktoUser(id: ID!, user_id: Int!, copies: Int!): Book @update
+  }

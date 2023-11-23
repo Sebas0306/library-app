@@ -27,12 +27,5 @@ class UsersTableSeeder extends Seeder
             'role'=> 'admin'
         ]);
 
-        for ($i = 0; $i<10; ++$i){
-            \App\Models\User::create([
-                'userName' => $faker->userName,
-                'email' =>$faker->email,
-                'password' =>$faker->password,
-            ]);
-        }
     }
 }

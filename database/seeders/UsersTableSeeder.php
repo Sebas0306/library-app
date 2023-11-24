@@ -18,7 +18,7 @@ class UsersTableSeeder extends Seeder
         \App\Models\User::truncate();
 
         $faker = \Faker\Factory::create();
-        $password = bcrypt('admin');
+        $password = 'admin';
 
         \App\Models\User::create([
             'userName' => 'Admin',

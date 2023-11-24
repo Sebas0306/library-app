@@ -25,13 +25,14 @@ type Query{
   getBookById(id: ID! @eq): Book @find
   getBooksListPage: [Book!]! @paginate
   getBooksList:[Book!]! @all
+  userLoginValidation(email: String! @eq, password: String! @eq): User @find
   }
 
   type Mutation{
   createUser(
     userName: String!
     email: String! @rules(apply: ["email", "unique:users"])
-    password: String! @hash @rules(apply:["min:8"])
+    password: String! @rules(apply:["min:8"])
   ): User @create
 
   deleteUser(id: ID! @whereKey): User @delete

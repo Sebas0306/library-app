@@ -59,6 +59,7 @@ type Query{
   ): Book @update
 
   deleteBook(id: ID! @whereKey): Book @delete
-
-  addOrReturnBookToUser(id: ID!, user_id: Int!, copies: Int!): Book @update
+  
+  lendBook(user_id: ID!, book_id: ID!): Boolean
+  returnBook(book_id: ID!): Boolean
   }

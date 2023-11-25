@@ -44,7 +44,6 @@ type Query{
     image: String!
     description: String!
     autor: String!
-    copies: Int
     year: String!
   ): Book @create
 
@@ -53,7 +52,6 @@ type Query{
     title: String, 
     image: String,
     description: String,
-    copies: Int,
     autor: String,
     year: String,
   ): Book @update

@@ -32,12 +32,12 @@ type Query{
   createUser(
     userName: String!
     email: String! @rules(apply: ["email", "unique:users"])
-    password: String! @rules(apply:["min:8"])
+    password: String! @hash @rules(apply:["min:8"])
   ): User @create
 
   deleteUser(id: ID! @whereKey): User @delete
 
-  updateUser(id: ID!, userName: String, password: String @rules(apply:["min:8"])): User @update
+  updateUser(id: ID!, userName: String, email: String, password: String @rules(apply:["min:8"])): User @update
 
     createBook(
     title: String!
@@ -60,5 +60,5 @@ type Query{
 
   deleteBook(id: ID! @whereKey): Book @delete
 
-  addBooktoUser(id: ID!, user_id: Int!, copies: Int!): Book @update
+  addOrReturnBookToUser(id: ID!, user_id: Int!, copies: Int!): Book @update
   }
